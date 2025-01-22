@@ -1,0 +1,10 @@
+SYSTEM = Silicon
+ENCUT = 520
+PREC = Accurate
+ISMEAR = 0
+SIGMA = 0.1
+IBRION = 2
+NSW = 50
+EDIFF = 1E-6
+ISIF = 3
+LREAL = Auto

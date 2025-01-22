@@ -1,0 +1,50 @@
+[
+    {
+        "task_inst": "Using VASP and Wannier90 to calculate the bandstructure of Si with GW approximation, the POSCAR file path is './POSCAR' and POTCAR file path is './POTCAR'.",
+        "type": "None",
+        "domain_knowledge": "",
+        "out_fname": ""
+    },
+    {
+        "task_inst": "You need to write a INCAR file for a default PBE calculation.",
+        "type": "vasp",
+        "domain_knowledge": "ISMEAR = 0\nSIGMA  = 0.05\nEDIFF  = 1E-8\nKSPACING = 0.1",
+        "out_fname": "./INCAR"
+    },
+    {
+        "task_inst": "You need to run the default PBE calculation with the script you have written.",
+        "type": "command",
+        "domain_knowledge": "mpirun -np 8 vasp_std",
+        "out_fname": ""
+    },
+    {
+        "task_inst": "You need to write a INCAR file to obtain DFT virtual orbitals.",
+        "type": "vasp",
+        "domain_knowledge": "ALGO = Exact\nNBANDS = 64\nLOPTICS = .TRUE. ; CSHIFT = 0.1\nNEDOS = 2000\nISMEAR = 0\nSIGMA = 0.05\nEDIFF = 1E-8",
+        "out_fname": "./INCAR"
+    },
+    {
+        "task_inst": "You need to run the virtual orbitals calculation with the script you have written.",
+        "type": "command",
+        "domain_knowledge": "mpirun -np 8 vasp_std",
+        "out_fname": ""
+    },
+    {
+        "task_inst": "You need to write a INCAR file for the GW calculation with Wannier90.",
+        "type": "vasp",
+        "domain_knowledge": "ALGO = GW0 ; LSPECTRAL = .TRUE. ; NOMEGA = 50\nNBANDS = 64\nISMEAR = 0\nSIGMA = 0.05\nEDIFF = 1E-8",
+        "out_fname": "./INCAR"
+    },
+    {
+        "task_inst": "You need to run the GW + Wannier90 calculation with the script you have written.",
+        "type": "command",
+        "domain_knowledge": "mpirun -np 8 vasp_std",
+        "out_fname": ""
+    },
+    {
+        "task_inst": "You need to run Wannier90 to generate the bandstructure.",
+        "type": "command",
+        "domain_knowledge": "wannier90.x wannier90",
+        "out_fname": ""
+    }
+]

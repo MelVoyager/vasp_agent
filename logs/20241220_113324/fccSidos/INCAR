@@ -1,0 +1,13 @@
+SYSTEM = DFT Virtual Orbitals
+ENCUT = 500
+PREC = Accurate
+ISMEAR = 1
+SIGMA = 0.1
+IBRION = -1
+NSW = 0
+LORBIT = 11
+LHFCALC = .TRUE.
+HFSCREEN = 0.2
+ALGO = D
+NELM = 100
+EDIFF = 1E-6

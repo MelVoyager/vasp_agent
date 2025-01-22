@@ -1,0 +1,68 @@
+[
+    {
+        "task_inst": "Using VASP to calculate the DOS of a material with GW approximation, the POSCAR file path is './POSCAR' and POTCAR file path is './POTCAR'.",
+        "type": "None",
+        "domain_knowledge": "",
+        "out_fname": ""
+    },
+    {
+        "task_inst": "You need to write an INCAR file for a DFT groundstate calculation.",
+        "type": "vasp",
+        "domain_knowledge": "ISMEAR = 0\nSIGMA  = 0.05\nEDIFF  = 1E-8\nKSPACING = 0.1",
+        "out_fname": "./INCAR"
+    },
+    {
+        "task_inst": "You need to run the DFT groundstate calculation with the script you have written.",
+        "type": "command",
+        "domain_knowledge": "mpirun -np 8 vasp_std",
+        "out_fname": ""
+    },
+    {
+        "task_inst": "You need to write an INCAR file to obtain DFT virtual orbitals.",
+        "type": "vasp",
+        "domain_knowledge": "ALGO = Exact\nNBANDS = 64\nLOPTICS = .TRUE.\nCSHIFT = 0.1\nNEDOS = 2000\nISMEAR = 0\nSIGMA = 0.05\nEDIFF = 1E-8",
+        "out_fname": "./INCAR"
+    },
+    {
+        "task_inst": "You need to run the DFT virtual orbitals calculation with the script you have written.",
+        "type": "command",
+        "domain_knowledge": "mpirun -np 8 vasp_std",
+        "out_fname": ""
+    },
+    {
+        "task_inst": "You need to write an INCAR file to perform the actual GW calculation.",
+        "type": "vasp",
+        "domain_knowledge": "ALGO = GW0\nLSPECTRAL = .TRUE.\nNOMEGA = 50\nNBANDS = 64\nISMEAR = 0\nSIGMA = 0.05\nEDIFF = 1E-8",
+        "out_fname": "./INCAR"
+    },
+    {
+        "task_inst": "You need to run the actual GW calculation with the script you have written.",
+        "type": "command",
+        "domain_knowledge": "mpirun -np 8 vasp_std",
+        "out_fname": ""
+    },
+    {
+        "task_inst": "You need to write a bash script to extract DOS data from 'vasprun.xml' and save it to 'dos.dat'.",
+        "type": "bash",
+        "domain_knowledge": "awk 'BEGIN{i=1} /dos>/,/\\/dos>/ {a[i]=$2 ; b[i]=$3 ; i=i+1} END{for (j=12;j<i-5;j++) print a[j],b[j]}' vasprun.xml > dos.dat\nef=`awk '/efermi/ {print $3}' vasprun.xml`",
+        "out_fname": "./extract_dos.sh"
+    },
+    {
+        "task_inst": "You need to run the bash script you have written to extract DOS data.",
+        "type": "command",
+        "domain_knowledge": "bash extract_dos.sh",
+        "out_fname": ""
+    },
+    {
+        "task_inst": "You need to write a Python script to plot the DOS data from 'dos.dat'.",
+        "type": "python",
+        "domain_knowledge": "import numpy as np\nimport matplotlib.pyplot as plt\n\ndata = np.loadtxt('dos.dat')\nenergy = data[:, 0]\ndos = data[:, 1]\n\nplt.figure(figsize=(8, 6))\nplt.plot(energy, dos, label='DOS')\nplt.axvline(x=0, color='r', linestyle='--', label='Fermi Level')\nplt.title('Density of States (DOS)')\nplt.xlabel('Energy (eV)')\nplt.ylabel('DOS')\nplt.legend()\nplt.grid()\nplt.savefig('dos_plot.png')\nplt.show()",
+        "out_fname": "./plot.py"
+    },
+    {
+        "task_inst": "You need to run the Python script you have written to plot the DOS.",
+        "type": "command",
+        "domain_knowledge": "python plot.py",
+        "out_fname": ""
+    }
+]

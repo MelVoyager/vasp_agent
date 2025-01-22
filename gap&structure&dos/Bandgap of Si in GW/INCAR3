@@ -1,0 +1,20 @@
+# Frequency dependent dielectric tensor including
+# local field effects within the RPA (default) or
+# including changes in the DFT xc-potential (LRPA=.FALSE.).
+# N.B.: beware one first has to have done a
+# calculation with ALGO=Exact, LOPTICS=.TRUE.
+# and a reasonable number of virtual states (see above)
+ALGO = GW0 ; LSPECTRAL = .TRUE. ; NOMEGA = 50
+   
+# be sure to take the same number of bands as for
+# the LOPTICS=.TRUE. calculation, otherwise the
+# WAVEDER file is not read correctly
+NBANDS = 64
+     
+# Add this to update the quasiparticle energies
+# in the Green's function (GW0)
+#NELM = 4
+    
+ISMEAR =  0
+SIGMA  =  0.05
+EDIFF  = 1E-8

@@ -1,0 +1,12 @@
+# Frequency dependent dielectric tensor without
+# local field effects
+ALGO = Exact
+NBANDS  = 64
+LOPTICS = .TRUE. ; CSHIFT = 0.1
+NEDOS = 2000
+# you might try
+#LPEAD = .TRUE.
+
+ISMEAR =  0
+SIGMA  =  0.05
+EDIFF  = 1E-8

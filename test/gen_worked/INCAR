@@ -1,0 +1,11 @@
+SYSTEM = Silicon
+ENCUT = 400
+ISMEAR = 0
+SIGMA = 0.1
+IBRION = 2
+NSW = 50
+EDIFF = 1E-5
+LWAVE = .FALSE.
+LCHARG = .FALSE.
+PREC = Accurate
+ALGO = Fast

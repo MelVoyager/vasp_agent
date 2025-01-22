@@ -1,0 +1,16 @@
+SYSTEM = GW Calculation
+ENCUT = 500
+PREC = Accurate
+ISMEAR = 0
+SIGMA = 0.1
+LREAL = Auto
+ALGO = All
+NCORE = 4
+NSW = 0
+GAMMA = .TRUE.
+LDAU = .FALSE.
+LDAU_LAMBDA = 1.0
+LDAU_U = 0.0
+LDAU_J = 0.0
+KPOINTS = automatic
+KPOINTS = 4 4 4

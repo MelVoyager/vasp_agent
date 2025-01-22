@@ -1,0 +1,24 @@
+# INCAR file for DFT groundstate calculation
+
+# General settings
+SYSTEM = Groundstate Calculation
+ISTART = 0            # Job: 0-new  1-continuation  2-samecut
+ICHARG = 2            # Charge: 0-CHGCAR  1-atom  2-atom+CHGCAR
+
+# Electronic relaxation
+ENCUT = 520           # Plane-wave cutoff energy
+EDIFF = 1E-5          # Global break condition for electronic SC-loop
+ISMEAR = 0            # Smearing method: -5-tet, 0-fermi, 1-gauss
+SIGMA = 0.05          # Smearing width
+
+# Ionic relaxation
+IBRION = -1           # Ionic relaxation: -1-no update, 0-quasi-Newton, 1-ionic relax
+NSW = 0               # Number of ionic steps
+EDIFFG = -0.01        # Convergence criterion for ionic relaxation
+
+# Spin polarization
+ISPIN = 1             # Spin polarization: 1-non spin polarized, 2-spin polarized
+
+# Output settings
+LWAVE = .FALSE.       # Write WAVECAR
+LCHARG = .FALSE.      # Write CHGCAR

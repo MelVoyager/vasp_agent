@@ -1,0 +1,9 @@
+# Step 2: virtual orbitals
+ISMEAR =  0
+SIGMA  =  0.05
+GGA    = PE
+
+ALGO = Exact
+NBANDS  = 64
+LOPTICS=.TRUE.
+NEDOS=2000

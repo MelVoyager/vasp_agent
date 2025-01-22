@@ -1,0 +1,10 @@
+SYSTEM = DFT Groundstate Calculation
+ENCUT = 520
+EDIFF = 1E-8
+ISMEAR = 0
+SIGMA = 0.05
+KSPACING = 0.1
+IBRION = 2
+NSW = 50
+ISIF = 3
+LREAL = Auto

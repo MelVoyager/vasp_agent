@@ -1,0 +1,56 @@
+[
+    {
+        "task_inst": "Using VASP to calculate the bandgap of si with GW approximation, the POSCAR file path is './POSCAR and POTCAR file path is './POTCAR'.",
+        "type": "None",
+        "domain_knowledge": "",
+        "out_fname": ""
+    },
+    {
+        "task_inst": "You need to write a INCAR file for a DFT groundstate calculation.",
+        "type": "vasp",
+        "domain_knowledge": "ISMEAR = 0\nSIGMA  = 0.05\nEDIFF  = 1E-8\nKSPACING = 0.1",
+        "out_fname": "./INCAR"
+    },
+    {
+        "task_inst": "You need to run the DFT groundstate calculation with the script you have written.",
+        "type": "command",
+        "domain_knowledge": "mpirun -np 8 vasp_std",
+        "out_fname": ""
+    },
+    {
+        "task_inst": "You need to write a INCAR file to obtain DFT virtual orbitals.",
+        "type": "vasp",
+        "domain_knowledge": "ALGO = Exact\nNBANDS = 64\nLOPTICS = .TRUE. ; CSHIFT = 0.1\nNEDOS = 2000\n# you might try\n#LPEAD = .TRUE.\nISMEAR = 0\nSIGMA = 0.05\nEDIFF = 1E-8",
+        "out_fname": "./INCAR"
+    },
+    {
+        "task_inst": "You need to run the DFT virtual orbitals with the script you have written.",
+        "type": "command",
+        "domain_knowledge": "mpirun -np 8 vasp_std",
+        "out_fname": ""
+    },
+    {
+        "task_inst": "You need to write a INCAR file to perform the actual GW calculation.",
+        "type": "vasp",
+        "domain_knowledge": "ALGO = GW0 ; LSPECTRAL = .TRUE. ; NOMEGA = 50\n\n# be sure to take the same number of bands as for\n# the LOPTICS=.TRUE. calculation, otherwise the\n# WAVEDER file is not read correctly\nNBANDS = 64\n\n# Add this to update the quasiparticle energies\n# in the Green's function (GW0)\n#NELM = 4\n\nISMEAR = 0\nSIGMA = 0.05\nEDIFF = 1E-8",
+        "out_fname": "./INCAR"
+    },
+    {
+        "task_inst": "You need to run the actual GW calculation with the script you have written.",
+        "type": "command",
+        "domain_knowledge": "mpirun -np 8 vasp_std",
+        "out_fname": ""
+    },
+    {
+        "task_inst": "You need to write a bash script to extract HOMO and LUMO data from the OUTCAR file, whose path is './OUTCAR'.",
+        "type": "bash",
+        "domain_knowledge": "homo=`awk '/NELECT/ {print $3/2}' $1`\nlumo=`awk '/NELECT/ {print $3/2+1}' $1`\nnkpt=`awk '/NKPTS/ {print $4}' $1`\n\ne1=`grep \"     $homo     \" $1 | tail -$nkpt | sort -n -k 3 | tail -1 | awk '{print $3}'`\ne2=`grep \"     $lumo     \" $1 | tail -$nkpt | sort -n -k 3 | head -1 | awk '{print $3}'`\n\necho \"HOMO: band:\" $homo \" E=\" $e1\necho \"LUMO: band:\" $lumo \" E=\" $e2",
+        "out_fname": "./gap_GW.sh"
+    },
+    {
+        "task_inst": "You need to run the bash script you have written to gather HOMO and LUMO data.",
+        "type": "command",
+        "domain_knowledge": "bash gap_GW.sh OUTCAR",
+        "out_fname": ""
+    }
+]

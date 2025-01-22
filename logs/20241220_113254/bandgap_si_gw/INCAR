@@ -1,0 +1,10 @@
+SYSTEM = Silicon DFT Groundstate Calculation
+ENCUT = 520
+ISMEAR = 0
+SIGMA = 0.05
+EDIFF = 1E-8
+IBRION = -1
+NSW = 0
+KPOINTS = automatic
+KSPACING = 0.1
+LREAL = AutoLREAL = .FALSE.

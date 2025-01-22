@@ -1,0 +1,9 @@
+Si
+  5.43  # Lattice constant (example value)
+     1.000  0.000  0.000
+     0.000  1.000  0.000
+     0.000  0.000  1.000
+   2  # Number of atoms
+Direct
+  0.000  0.000  0.000
+  0.250  0.250  0.250

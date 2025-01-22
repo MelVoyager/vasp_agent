@@ -1,0 +1,25 @@
+SYSTEM = default
+ISTART = 1
+ICHARG = 11         # 读取CHGCAR文件
+PREC = Accurate
+LREAL = .FALSE.
+LCHARG = .TRUE.      # 不保存电荷密度文件
+LWAVE = .TRUE.       # 不保存波函数文件
+
+NELM = 500          # 最大电子步
+NELMIN = 5
+EDIFF = 1E-6         # 能量收敛
+ALGO = Normal
+ENCUT = 500          # 能量截断，越大越精确，但也越费时
+GGA = PE            # 采用GGA-PBE泛函
+ISMEAR = 0
+SIGMA = 0.05
+
+NSW = 0            # 最大离子步
+EDIFFG = -0.01        # 力收敛
+IBRION = -1
+ISIF = 3
+POTIM = 0.5
+
+LORBIT = 11          # 投影态密度
+NEDOS = 2000
