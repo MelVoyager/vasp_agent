@@ -42,9 +42,12 @@ FORMAT_PROMPT = """Please keep your response concise and do not use a code block
 Please do not suggest a few line changes, incomplete program outline, or partial code that requires the user to modify.
 Please do not use any interactive Python commands in your program, such as `!pip install numpy`, which will cause execution errors."""
 
-REQUEST_PROMPT = "You are only required to answer the last prompt in context and all user prompts are just for reference. DO NOT ANSWER THE USER PROMPT BEFORE."
+REQUEST_PROMPT = "You are only required to answer the last prompt in context and all user prompts are just for reference. DO NOT ANSWER THE USER PREVIOUS PROMPT."
 
-EVAL_PROMPT = "You are provided with the output of terminal. Please refer to message before to check them and determine whether to retrieve information or modify files. Please evaluate the output and verify whether is performed correctly. If not, modify the vasp input files, bash scripts or python files to make it correct. During the process, you are allowed only to provide one terminal command each time to gather information and modify the files. For example, you can use \"cat \"a.py to check the content of a.py, you can also use \"echo new content >> a.sh\" to modify files. Other operations are not allowed. "
+EVAL_PROMPT = """You are provided with the output of terminal. Please refer to message before to check them and determine whether to retrieve information or modify files. Please evaluate the output and verify whether is performed correctly. If not, modify the vasp input files, bash scripts or python files to make it correct. During the process, you are allowed only to provide one terminal command each time to gather information and modify the files. For example, you can use \"cat \"a.py to check the content of a.py, you can also use \"echo new content >> a.sh\" to modify files. Other operations are not allowed. You should always notice your last command and avoid repeating. If you finished the evaluation, give a signal:
+```finished
+```
+"""
 PROMPT_DICT = {
     "vasp": VASP_PROMPT,
     "python": PYTHON_PROMPT,
@@ -76,7 +79,8 @@ class agent():
         # self.msg.append({"role":"user", "content": usr_msg})
         self.sys_msg = (
             PROMPT_DICT[task["type"]] + "\n\n" + 
-            FORMAT_PROMPT + "\n\n" 
+            FORMAT_PROMPT + "\n\n" +
+            REQUEST_PROMPT + "\n\n"
         )
         self.msg = [{"role": "system", "content":self.sys_msg}, {"role":"user", "content": usr_msg}]
         
@@ -99,19 +103,23 @@ class agent():
         #         old_program = f.read()
         # match = re.search(r"```VASP(.*?)```", assistant_output, re.DOTALL)
         command = None
-        match task["type"]:
-            case "vasp":
-                code = re.search(r"```vasp(.*?)```", assistant_output, re.DOTALL).group(1).strip()
-            case "python":
-                code = re.search(r"```python(.*?)```", assistant_output, re.DOTALL).group(1).strip()
-            case "bash":
-                code = re.search(r"```bash(.*?)```", assistant_output, re.DOTALL).group(1).strip()
-            case "command":
-                command = re.search(r"```command(.*?)```", assistant_output, re.DOTALL).group(1).strip()
-            case "None":
-                code = ""
-            case _:
-                raise ValueError("Invalid task type")
+        try:
+            command = re.search(r"```finished(.*?)```", assistant_output, re.DOTALL).group(1).strip()
+            command = None
+        except:
+            match task["type"]:
+                case "vasp":
+                    code = re.search(r"```vasp(.*?)```", assistant_output, re.DOTALL).group(1).strip()
+                case "python":
+                    code = re.search(r"```python(.*?)```", assistant_output, re.DOTALL).group(1).strip()
+                case "bash":
+                    code = re.search(r"```bash(.*?)```", assistant_output, re.DOTALL).group(1).strip()
+                case "command":
+                    command = re.search(r"```command(.*?)```", assistant_output, re.DOTALL).group(1).strip()
+                case "None":
+                    code = ""
+                case _:
+                    raise ValueError("Invalid task type")
             
         if out_fname:
             with open(out_fname, "w+", encoding="utf-8") as f:

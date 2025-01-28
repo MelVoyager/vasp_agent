@@ -1,0 +1,56 @@
+[
+    {
+        "task_inst": "Using VASP to calculate the lattice constants of the new 2D material. You need to write a POSCAR file for the material. The lattice constants should be set as variables.",
+        "type": "vasp",
+        "domain_knowledge": "",
+        "out_fname": "./test/gen/POSCAR"
+    },
+    {
+        "task_inst": "You need to write a INCAR file for the optimization calculation of the 2D material.",
+        "type": "vasp",
+        "domain_knowledge": "",
+        "out_fname": "./test/gen/INCAR"
+    },
+    {
+        "task_inst": "You need to write a KPOINTS file for the optimization calculation of the 2D material.",
+        "type": "vasp",
+        "domain_knowledge": "",
+        "out_fname": "./test/gen/KPOINTS"
+    },
+    {
+        "task_inst": "A POTCAR file for the 2D material is needed, path is ./test/gen/POTCAR.",
+        "type": "None",
+        "domain_knowledge": "",
+        "out_fname": ""
+    },
+    {
+        "task_inst": "You have written all the input files for VASP. Now you need to run VASP to optimize the lattice constants. Write a bash script to run VASP simulation. Remember vasp executable is in environment, vasp_std can be run directly.",
+        "type": "bash",
+        "domain_knowledge": "",
+        "out_fname": "./test/gen/script.sh"
+    },
+    {
+        "task_inst": "Give a command in terminal to launch the bash script you written, the path is /home/user/Programs/vasp_agent/test/gen/script.sh.",
+        "type": "command",
+        "domain_knowledge": "",
+        "out_fname": ""
+    },
+    {
+        "task_inst": "Once the lattice constants are optimized, use VASP to perform a band structure calculation on the material. You need to modify the INCAR file for the band structure calculation.",
+        "type": "vasp",
+        "domain_knowledge": "",
+        "out_fname": "./test/gen/INCAR_band"
+    },
+    {
+        "task_inst": "You need to modify the KPOINTS file to suit the band structure calculation for the 2D material.",
+        "type": "vasp",
+        "domain_knowledge": "",
+        "out_fname": "./test/gen/KPOINTS_band"
+    },
+    {
+        "task_inst": "You need to write a python script to analyze the band structure results. The script should read the output from VASP and plot the band structure. Output the critical points and the corresponding energies.",
+        "type": "python",
+        "domain_knowledge": "",
+        "out_fname": "./test/gen/plot_band_structure.py"
+    }
+]

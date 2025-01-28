@@ -1,0 +1,6 @@
+{
+    "task_inst": "Write a POSCAR file for Si including the crystal structure and atomic positions.",
+    "type": "vasp",
+    "domain_knowledge": "",
+    "out_fname": "./band_structure/POSCAR"
+}

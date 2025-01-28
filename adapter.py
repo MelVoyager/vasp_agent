@@ -27,4 +27,4 @@ class adapter:
         print(f"Stdout: {result.stdout}")
         print(f"Stderr: {result.stderr}")
         
-        return result.returncode, result.stdout if result.returncode == 0 else result.stderr
+        return result.returncode, result.stdout

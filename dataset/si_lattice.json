@@ -30,7 +30,7 @@
         "out_fname": "./test/gen/script.sh"
     },
     {
-        "task_inst": "Give a command in terminal to launch the bash script you written, the path is /home/xiazeyu21/Programs/Agent/test/gen/script.sh",
+        "task_inst": "Give a command in terminal to launch the bash script you written, the path is /home/xiazeyu21/Programs/vasp_agent/test/gen/script.sh",
         "type": "command",
         "domain_knowledge": "",
         "out_fname": ""

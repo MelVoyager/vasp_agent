@@ -1,7 +1,4 @@
-import json
-
-Si_Lattice = [
-
+[
     {
         "task_inst": "Using VASP to calculate the lattice constant of Si. You need to write a POSCAR file of Si. Here the lattice constant is unknown, therefore you should set as a variable.",
         "type": "vasp",
@@ -39,12 +36,9 @@ Si_Lattice = [
         "out_fname": ""
     },
     {
-        "task_inst": "Write a python code to change the lattice constant varible in your former output. The path is \'./test/gen/POSCAR\'. and you should initialize subprocesses with different lattice constants. In each subprocess, you should filter the output to obatin the energy of the system. Your previous bash script can launch the vasp simulation, whose location is ./test/gen/script.sh. Finally, plot the figure of different lattice constants and the energy, and output the real lattice constant, which has lowest energy.",
+        "task_inst": "Write a python code to change the lattice constant varible in your former output. The path is './test/gen/POSCAR'. and you should initialize subprocesses with different lattice constants. In each subprocess, you should filter the output to obatin the energy of the system. Your previous bash script can launch the vasp simulation, whose location is ./test/gen/script.sh. Finally, plot the figure of different lattice constants and the energy, and output the real lattice constant, which has lowest energy.",
         "type": "python",
         "domain_knowledge": "",
         "out_fname": "./test/gen/try.py"
-    },
+    }
 ]
-
-with open("./dataset/si_lattice.json", "w") as f:
-    json.dump(Si_Lattice, f, indent=4)
